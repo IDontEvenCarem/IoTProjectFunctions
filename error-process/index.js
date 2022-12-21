@@ -13,7 +13,7 @@ module.exports = async function (context, req) {
                 return [];
             }
             if (unknown + sensor + power + emergency > 3) {
-                return [EmergencyStop(Device)]
+                return [EmergencyStop(context, Device)]
             } else {
                 return []
             }
@@ -32,7 +32,7 @@ module.exports = async function (context, req) {
  * Request the device to be stopped
  * @param {String} Device The name of the device to stopped
  */
-async function EmergencyStop(Device) {
+async function EmergencyStop(context, Device) {
     if (already_sent.has(Device)) {
         return; // avoid sending multiple times because of batching
     }

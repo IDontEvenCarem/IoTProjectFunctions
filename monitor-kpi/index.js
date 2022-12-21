@@ -13,7 +13,7 @@ module.exports = async function (context, req) {
                 return [];
             }
             if (KPI < 0.9) {
-                return [LowerProduction(Device)]
+                return [LowerProduction(context, Device)]
             } else {
                 return []
             }
@@ -32,7 +32,7 @@ module.exports = async function (context, req) {
  * Request the production to be lowered by 10 percent points
  * @param {String} Device The name of the device to alter
  */
-async function LowerProduction(Device) {
+async function LowerProduction(context, Device) {
     if (already_dropped.has(Device)) {
         return; // we don't want to drop multiple times just because we were batched
     }
