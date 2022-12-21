@@ -44,6 +44,7 @@ async function LowerProduction(context, Device) {
             const realTwin = await registry.getTwin(Device)
             const currentProd = await realTwin.responseBody.properties.desired['ProductionRate']
             await registry.updateTwin(Device, {
+                etag: realTwin.responseBody.etag,
                 properties: {
                     desired: {
                         ProductionRate: Math.max(0, currentProd - 10)
